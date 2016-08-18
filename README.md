@@ -1,4 +1,4 @@
-# electron-webpack-react-boilerplate
+# electron-react-webpack-boilerplate
 
 Electron + webpack + Babel + React
 
