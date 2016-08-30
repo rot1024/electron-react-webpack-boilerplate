@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 // eslint-disable-next-line node/no-unpublished-import
 import { AppContainer } from "react-hot-loader";
 
+import "./styles.css";
 import App from "./app";
 
 const root = document.getElementById("root");

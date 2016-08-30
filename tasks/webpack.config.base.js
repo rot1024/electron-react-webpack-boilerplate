@@ -4,6 +4,9 @@ const path = require("path");
 /* eslint-disable node/no-unpublished-require */
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const postCssImport = require("postcss-import");
+const postCssCssNext = require("postcss-cssnext");
+const cssnano = require("cssnano");
 /* eslint-enable node/no-unpublished-require */
 
 const PORT = 3000;
@@ -13,6 +16,12 @@ module.exports = type => {
   const electron = type === "electron";
   const prod = type === "production";
   const dev = !prod && !electron;
+
+  const cssLoaders = [
+    "style",
+    "css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]",
+    "postcss"
+  ];
 
   return {
     _port: PORT,
@@ -26,7 +35,6 @@ module.exports = type => {
         `webpack-dev-server/client?http://localhost:${PORT}`,
         "webpack/hot/only-dev-server",
       ] : [],
-      "./app/style.css",
       "./app/renderer"
     ],
     externals: electron ? [
@@ -42,8 +50,8 @@ module.exports = type => {
         loader: "json"
       }, {
         test: /\.css$/,
-        loader: prod ? ExtractTextPlugin.extract("style", "css", "postcss") : void 0,
-        loaders: !prod ? ["style", "css", "postcss"] : void 0
+        loader: prod ? ExtractTextPlugin.extract(...cssLoaders) : void 0,
+        loaders: !prod ? cssLoaders : void 0
       }]
     },
     node: electron ? {
@@ -88,7 +96,16 @@ module.exports = type => {
     ],
     target: electron ? "electron-main" : "electron-renderer",
     postcss() {
-      return [];
+      return [
+        postCssImport({ path: ["node_modules", "./app"] }),
+        postCssCssNext({
+          features: {
+            autoprefixer: false
+          },
+          warnForDuplicates: false
+        }),
+        cssnano()
+      ];
     }
   };
 
