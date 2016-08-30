@@ -10,9 +10,11 @@ module.exports = {
     "babel/arrow-parens": [1, "as-needed"],
     "babel/generator-star-spacing": [1, "before"],
     "babel/new-cap": 2,
-    "babel/no-await-in-loop": 2,
     "babel/object-curly-spacing": [1, "always"],
     "babel/object-shorthand": 1,
+    "babel/no-await-in-loop": 2,
+    "babel/flow-object-type": [1, "comma"],
+    "babel/func-params-comma-dangle": 0,
     "node/no-missing-require": [2, {
       allowModules: ["electron"]
     }],
