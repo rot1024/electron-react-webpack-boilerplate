@@ -11,7 +11,7 @@
       "plugins": ["react-hot-loader/babel"]
     },
     "test": {
-      "presets": ["power-assert"]
+      "sourceMaps": "inline"
     }
   }
 }
