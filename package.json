@@ -8,7 +8,7 @@
     "start": "electron .",
     "test": "cross-env NODE_ENV=test nyc ava",
     "test-watch": "npm test -- --watch",
-    "eslint": "eslint app test *.js",
+    "eslint": "eslint app tasks",
     "stylelint": "stylelint app/**/*.css",
     "lint": "npm-run-all --parallel eslint stylelint",
     "dev": "npm-run-all --parallel dev-server dev-start",
@@ -100,7 +100,7 @@
     ],
     "require": [
       "babel-register",
-      "./test/setup"
+      "./app/test/setup"
     ],
     "source": [
       "**/*.js",
