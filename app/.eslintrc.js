@@ -21,12 +21,8 @@ module.exports = {
     "node/no-missing-import": [2, {
       allowModules: ["electron"]
     }],
-    "node/no-unpublished-require": [2, {
-      allowModules: ["electron"]
-    }],
-    "node/no-unpublished-import": [2, {
-      allowModules: ["electron"]
-    }],
+    "node/no-unpublished-require": 0,
+    "node/no-unpublished-import": 0,
     "node/no-unsupported-features": 0,
     "node/shebang": 0,
     "react/forbid-prop-types": 0,
