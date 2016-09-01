@@ -69,14 +69,14 @@
     "eslint-plugin-react": "^6.2.0",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "jsdom": "^9.4.1",
+    "jsdom": "^9.4.5",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",
-    "npm-run-all": "^3.0.0",
+    "npm-run-all": "^3.1.0",
     "nyc": "^8.1.0",
     "postcss-cssnext": "^2.7.0",
     "postcss-import": "^8.1.2",
-    "postcss-loader": "^0.11.0",
+    "postcss-loader": "^0.11.1",
     "postcss-modules-extract-imports": "^1.0.1",
     "postcss-modules-local-by-default": "^1.1.1",
     "postcss-modules-scope": "^1.0.2",
@@ -89,7 +89,7 @@
     "stylelint": "^7.2.0",
     "stylelint-config-standard": "^13.0.0",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.15.1"
   },
   "dependencies": {
     "react": "^15.2.1",
