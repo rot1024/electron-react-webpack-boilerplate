@@ -17,7 +17,8 @@ const options = {
   "app-version": pkg.version,
   // icon: "app/app",
   ignore: [
-    /^\/node_modules\/(?!source-map-support)/,
+    // source-map-support dependencies
+    /^\/node_modules\/(?!source-map-support|amdefine)/,
     /^\/(?!app|build|node_modules|package.json$)/,
     /^\/app\/(?!assets|index.html)/
   ],
