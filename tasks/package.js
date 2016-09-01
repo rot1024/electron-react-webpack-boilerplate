@@ -21,7 +21,7 @@ const options = {
     /^\/(?!app|build|node_modules|package.json$)/,
     /^\/app\/(?!assets|index.html)/
   ],
-  version: pkg.devDependencies["electron-prebuilt"].replace(/^\^/, ""),
+  version: pkg.devDependencies.electron.replace(/^\^/, ""),
   out: "dist"
 };
 
