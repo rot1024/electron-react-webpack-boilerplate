@@ -6,7 +6,7 @@
     <script>
       (function() {
         "use strict";
-        if (!process.env.HOT) {
+        if (process.env.NODE_ENV !== "development") {
           const link = document.createElement("link");
           link.rel = "stylesheet";
           link.href = "../build/style.css";
