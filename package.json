@@ -6,11 +6,13 @@
   "main": "build",
   "scripts": {
     "start": "electron .",
+    "postinstall": "npm run rebuild",
     "test": "cross-env NODE_ENV=test nyc ava",
     "test-watch": "npm test -- --watch",
     "eslint": "eslint app tasks",
     "stylelint": "stylelint app/**/*.css",
     "lint": "npm-run-all --parallel eslint stylelint",
+    "rebuild": "node tasks/rebuild",
     "dev": "npm-run-all --parallel dev-server dev-start",
     "dev-server": "node tasks/server",
     "dev-start": "cross-env HOT=1 NODE_ENV=development electron -r babel-register app",
