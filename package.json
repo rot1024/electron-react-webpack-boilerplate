@@ -39,6 +39,19 @@
   "engines": {
     "node": ">=6"
   },
+  "ava": {
+    "babel": "inherit",
+    "files": [
+      "app/**/*.test.js"
+    ],
+    "require": [
+      "babel-register",
+      "./app/test/setup"
+    ],
+    "source": [
+      "app/**/*.js"
+    ]
+  },
   "devDependencies": {
     "archiver": "^1.2.0",
     "ava": "^0.16.0",
@@ -94,20 +107,5 @@
   "dependencies": {
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
-  },
-  "ava": {
-    "babel": "inherit",
-    "files": [
-      "app/**/{*_test,test}.js"
-    ],
-    "require": [
-      "babel-register",
-      "./app/test/setup"
-    ],
-    "source": [
-      "**/*.js",
-      "!dist/**/*",
-      "!build/**/*"
-    ]
   }
 }
