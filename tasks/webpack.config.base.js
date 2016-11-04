@@ -22,7 +22,7 @@ module.exports = type => {
   ].join("!");
 
   return {
-    _port: PORT,
+    port: PORT,
     debug: dev,
     devtool: "source-map",
     entry: electron ? [
