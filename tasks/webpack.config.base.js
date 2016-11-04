@@ -41,7 +41,7 @@ module.exports = type => {
     module: {
       loaders: [{
         test: /\.js$/,
-        loaders: ["babel"],
+        loader: "babel",
         exclude: /node_modules/
       }, {
         test: /\.json$/,
