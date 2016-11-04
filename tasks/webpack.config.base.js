@@ -4,9 +4,8 @@ const path = require("path");
 /* eslint-disable node/no-unpublished-require */
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const postCssImport = require("postcss-import");
-const postCssCssNext = require("postcss-cssnext");
-const cssnano = require("cssnano");
+const cssimport = require("postcss-smart-import");
+const cssnext = require("postcss-cssnext");
 /* eslint-enable node/no-unpublished-require */
 
 const PORT = 3000;
@@ -17,11 +16,10 @@ module.exports = type => {
   const prod = type === "production";
   const dev = !prod && !electron;
 
-  const cssLoaders = [
-    "style",
-    "css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]",
+  const cssLoader = [
+    "css?sourceMap&modules&importLoaders=1&localIdentName=[local]_[hash:base64:5]",
     "postcss"
-  ];
+  ].join("!");
 
   return {
     _port: PORT,
@@ -47,11 +45,12 @@ module.exports = type => {
         exclude: /node_modules/
       }, {
         test: /\.json$/,
-        loader: "json"
+        loader: "json",
+        exclude: /node_modules/
       }, {
         test: /\.css$/,
-        loader: prod ? ExtractTextPlugin.extract(...cssLoaders) : void 0,
-        loaders: !prod ? cssLoaders : void 0
+        loader: prod ? ExtractTextPlugin.extract("style", cssLoader) : `style!${cssLoader}`,
+        exclude: /node_modules/
       }]
     },
     node: electron ? {
@@ -95,16 +94,15 @@ module.exports = type => {
       ] : []
     ],
     target: electron ? "electron-main" : "electron-renderer",
-    postcss() {
+    postcss(wp) {
       return [
-        postCssImport({ path: ["node_modules", "./app"] }),
-        postCssCssNext({
-          features: {
-            autoprefixer: false
-          },
-          warnForDuplicates: false
+        cssimport({
+          path: ["node_modules", "./app"],
+          addDependencyTo: wp
         }),
-        cssnano()
+        cssnext({
+          autoprefixer: ["Chrome >= 53"]
+        })
       ];
     }
   };
