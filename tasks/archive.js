@@ -2,10 +2,8 @@
 
 const fs = require("fs");
 const os = require("os");
-/* eslint-disable node/no-unpublished-require */
 const archiver = require("archiver");
 const argv = require("minimist")(process.argv.slice(2));
-/* eslint-enable node/no-unpublished-require */
 const pkg = require("../package.json");
 
 const shouldArchiveAll = argv.all || false;

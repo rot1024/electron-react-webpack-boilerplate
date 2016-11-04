@@ -1,10 +1,8 @@
 "use strict";
 
 const childProcess = require("child_process");
-/* eslint-disable node/no-unpublished-require */
 const electron = require("electron");
 const rebuild = require("electron-rebuild");
-/* eslint-enable node/no-unpublished-require */
 
 rebuild.shouldRebuildNativeModules(electron)
   .then(shouldBuild => {

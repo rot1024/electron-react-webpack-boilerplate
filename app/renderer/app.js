@@ -1,6 +1,7 @@
-import React, { PropTypes } from "react";
+import React from "react";
 
-export default class App extends React.Component {
+// eslint-disable-next-line react/prefer-stateless-function
+export default class App extends React.PureComponent {
 
   static propTypes = {
 
