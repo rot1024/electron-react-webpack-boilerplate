@@ -3,6 +3,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const BabiliPlugin = require("babili-webpack-plugin");
 
 const PORT = 3000;
 
@@ -69,30 +70,34 @@ module.exports = ({ platform, prod } = {}) => {
     output: {
       filename: electronMain ? "index.js" : "bundle.js",
       libraryTarget: "commonjs2",
-      path: path.resolve(__dirname, "..", "build"),
+      path: path.resolve(__dirname, "build"),
       publicPath: electronRenderer && !prod ? `http://localhost:${PORT}/build/` : undefined
     },
     plugins: [
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(prod ? "production" : "development")
       }),
-      ...electronMain && !prod ? [
-        new webpack.BannerPlugin({
-          banner: 'require("source-map-support").install();',
-          entryOnly: false,
-          raw: true
-        })
-      ] : [],
-      ...electronRenderer && prod ? [
-        extractCSS
-      ] : [],
-      ...electronRenderer && !prod ? [
-        new webpack.HotModuleReplacementPlugin(),
-      ] : [],
-      ...!prod ? [
+      ...electronRenderer ? [
+        ...prod ? [
+          extractCSS
+        ] : [
+          new webpack.HotModuleReplacementPlugin(),
+        ]
+      ] : [
+        ...prod ? [] : [
+          new webpack.BannerPlugin({
+            banner: 'require("source-map-support").install();',
+            entryOnly: false,
+            raw: true
+          })
+        ],
+      ],
+      ...prod ? [
+        new BabiliPlugin()
+      ] : [
         new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
-      ] : []
+      ]
     ],
     target: electronMain ? "electron-main" : "electron-renderer"
   };
