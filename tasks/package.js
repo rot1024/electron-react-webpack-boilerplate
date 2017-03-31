@@ -9,40 +9,38 @@ const pkg = require("../package.json");
 const shouldBuildAll = argv.all || false;
 
 const options = {
-  dir: ".",
+  appVersion: pkg.version,
   asar: true,
-  name: pkg.productName,
-  "app-version": pkg.version,
-  // icon: "app/app",
+  dir: ".",
+  electronVersion: pkg.devDependencies.electron.replace(/^\^/, ""),
+  icon: pkg.electronIcon,
   ignore: [
     // source-map-support dependencies
     /^\/node_modules\/(?!source-map-support|amdefine)/,
     /^\/(?!app|build|node_modules|package.json$)/,
     /^\/app\/(?!assets|index.html)/
   ],
-  version: pkg.devDependencies.electron.replace(/^\^/, ""),
+  name: pkg.productName || pkg.name,
   out: "dist"
 };
 
 del("dist")
   .then(() => {
-    if (shouldBuildAll) {
-      const archs = ["ia32", "x64"];
-      const platforms = ["linux", "win32", "darwin"];
-      platforms.forEach(platform => {
-        archs.forEach(arch => {
-          pack(platform, arch).then(
-          () => console.log(`${platform} ${arch} finished`),
-          err => { if (err) throw err; }
+    const archs = shouldBuildAll ? ["ia32", "x64"] : [os.arch()];
+    const platforms = shouldBuildAll ? ["linux", "win32", "darwin"] : [os.platform()];
+    platforms.forEach(platform => {
+      archs.forEach(arch => {
+        console.log(`${platform} ${arch} start`);
+        pack(platform, arch).then(
+          () => console.log(`${platform} ${arch} finish`),
+          err => {
+            if (!err) return;
+            console.log(`${platform} ${arch} error`);
+            throw err;
+          }
         );
-        });
       });
-    } else {
-      pack(os.platform(), os.arch()).then(
-      () => console.log(`${os.platform()} ${os.arch()} finished`),
-      err => { if (err) throw err; }
-    );
-    }
+    });
   })
   .catch(err => {
     console.error(err);
@@ -50,16 +48,16 @@ del("dist")
 
 function pack(platform, arch) {
   if (platform === "darwin" && arch === "ia32") {
-    return Promise.reject(new Error("macOS 32bit is not supported"));
+    return Promise.reject(); // eslint-disable-line prefer-promise-reject-errors
   }
 
   const opts = Object.assign({}, options, {
     platform,
     arch,
-    // icon: options.icon + (
-    //   platform === "darwin" ? ".icns" :
-    //   platform === "win32" ? ".ico" : ".png"
-    // )
+    icon: options.icon ? options.icon + (
+      platform === "darwin" ? ".icns" :
+      platform === "win32" ? ".ico" : ".png"
+    ) : undefined
   });
 
   return new Promise((resolve, reject) => {
