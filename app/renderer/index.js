@@ -1,28 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// eslint-disable-next-line node/no-unpublished-import
 import { AppContainer } from "react-hot-loader";
 
 import "./style.css";
 import App from "./app";
 
-const root = document.getElementById("root");
+function render(AppComponent) {
+  ReactDOM.render(
+    <AppContainer>
+      <AppComponent />
+    </AppContainer>,
+    document.getElementById("root")
+  );
+}
 
-ReactDOM.render(
-  <AppContainer>
-    <App />
-  </AppContainer>,
-  root
-);
+render(App);
 
-if (process.env.NODE_ENV === "development" && module.hot) {
+if (module.hot) {
   module.hot.accept("./app", () => {
-    const NextApp = require("./app").default;
-    ReactDOM.render(
-      <AppContainer>
-        <NextApp />
-      </AppContainer>,
-      root
-    );
+    render(require("./app").default);
   });
 }
