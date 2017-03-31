@@ -2,22 +2,6 @@ import { app, BrowserWindow } from "electron";
 
 let win;
 
-async function installExtensions() {
-  if (process.env.NODE_ENV === "development") {
-    // eslint-disable-next-line node/no-unpublished-require
-    const installer = require("electron-devtools-installer");
-    const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-    const extensions = [
-      "REACT_DEVELOPER_TOOLS",
-      "REDUX_DEVTOOLS"
-    ];
-    for (const e of extensions) {
-      // eslint-disable-next-line babel/no-await-in-loop
-      await installer.default(installer[e], forceDownload);
-    }
-  }
-}
-
 function createWindow() {
   win = new BrowserWindow({
     show: false,
@@ -26,11 +10,9 @@ function createWindow() {
   });
 
   if (process.env.NODE_ENV === "development") {
+    require("electron-debug")();
     win.loadURL(`file://${__dirname}/../renderer/index.html`);
-    win.webContents.openDevTools();
-  }
-
-  if (process.env.NODE_ENV === "production") {
+  } else {
     win.loadURL(`file://${__dirname}/../app/renderer/index.html`);
   }
 
@@ -45,12 +27,21 @@ function createWindow() {
 }
 
 if (process.env.NODE_ENV === "development") {
-  // eslint-disable-next-line node/no-unpublished-require
   require("electron-debug")();
 }
 
 app.on("ready", async () => {
-  await installExtensions();
+  if (process.env.NODE_ENV === "development") {
+    const installer = require("electron-devtools-installer");
+    const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+    const extensions = [
+      "REACT_DEVELOPER_TOOLS",
+      "REDUX_DEVTOOLS"
+    ];
+    await Promise.all(
+      extensions.map(e => installer.default(installer[e], forceDownload))
+    );
+  }
   createWindow();
 });
 
