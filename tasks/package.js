@@ -50,7 +50,7 @@ del("dist")
 
 function pack(platform, arch) {
   if (platform === "darwin" && arch === "ia32") {
-    return Promise.reject();
+    return Promise.reject(new Error("macOS 32bit is not supported"));
   }
 
   const opts = Object.assign({}, options, {

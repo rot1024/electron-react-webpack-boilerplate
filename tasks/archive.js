@@ -30,7 +30,7 @@ if (shouldArchiveAll) {
 
 function archive(platform, arch) {
   if (platform === "darwin" && arch === "ia32") {
-    return Promise.reject();
+    return Promise.reject(new Error("macOS 32bit is not supported"));
   }
   return new Promise((resolve, reject) => {
     const dir = `dist/${pkg.productName}-${platform}-${arch}`;
