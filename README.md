@@ -2,7 +2,7 @@
 
 Electron + webpack + Babel + React
 
-REQUIRED: Node.js v6
+REQUIRED: Node.js >= v6
 
 ## Getting Started
 
@@ -25,5 +25,5 @@ npm run package # package for current OS
 npm run package-all # package for all OS
 npm run archive # archive for current OS
 npm run archive-all # archive for all OS
-npm run release
+npm run release # build -> package-all -> archive-all
 ```
