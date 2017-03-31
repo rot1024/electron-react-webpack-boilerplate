@@ -15,8 +15,6 @@ const options = {
   electronVersion: pkg.devDependencies.electron.replace(/^\^/, ""),
   icon: pkg.electronIcon,
   ignore: [
-    // source-map-support dependencies
-    /^\/node_modules\/(?!source-map-support|amdefine)/,
     /^\/(?!app|build|node_modules|package.json$)/,
     /^\/app\/(?!assets|index.html)/
   ],

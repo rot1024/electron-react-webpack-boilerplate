@@ -8,11 +8,9 @@ const PORT = 3000;
 
 const extractCSS = new ExtractTextPlugin("style.css");
 
-module.exports = ({ type } = { type: "development" }) => {
-
-  const electron = type === "electron";
-  const prod = type === "production";
-  const dev = !prod && !electron;
+module.exports = ({ platform, prod } = {}) => {
+  const electronMain = platform === "electron";
+  const electronRenderer = !electronMain;
 
   const cssLoaders = [
     {
@@ -22,7 +20,7 @@ module.exports = ({ type } = { type: "development" }) => {
         importLoaders: 1,
         localIdentName: "[local]_[hash:base64:5]",
         modules: true,
-        sourceMap: true
+        sourceMap: !prod
       }
     },
     "postcss-loader"
@@ -33,30 +31,30 @@ module.exports = ({ type } = { type: "development" }) => {
       hot: true,
       port: PORT
     },
-    devtool: "inline-source-map",
-    entry: electron ? [
+    devtool: prod ? undefined : "inline-source-map",
+    entry: electronMain ? [
       "./app"
     ] : [
-      ...dev ? [
+      ...!prod ? [
         "react-hot-loader/patch",
         `webpack-dev-server/client?http://localhost:${PORT}`,
         "webpack/hot/only-dev-server",
       ] : [],
       "./app/renderer"
     ],
-    externals: electron ? [
+    externals: electronMain && !prod ? [
       "source-map-support"
     ] : [],
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.js($|\?)/,
           use: "babel-loader",
           exclude: /node_modules/
         },
         {
-          test: /\.css$/,
-          use: prod ? extractCSS({
+          test: /\.css($|\?)/,
+          use: prod ? extractCSS.extract({
             fallback: "style-loader",
             use: cssLoaders
           }) : ["style-loader", ...cssLoaders],
@@ -64,37 +62,39 @@ module.exports = ({ type } = { type: "development" }) => {
         }
       ]
     },
-    node: electron ? {
-      __dirname: false,
+    node: electronMain ? {
+      __dirname: false, // for asar
       __filename: false
     } : {},
     output: {
-      filename: electron ? "index.js" : "bundle.js",
+      filename: electronMain ? "index.js" : "bundle.js",
       libraryTarget: "commonjs2",
       path: path.resolve(__dirname, "..", "build"),
-      publicPath: dev ? `http://localhost:${PORT}/build/` : undefined
+      publicPath: electronRenderer && !prod ? `http://localhost:${PORT}/build/` : undefined
     },
     plugins: [
       new webpack.DefinePlugin({
-        "process.env.NODE_ENV": JSON.stringify(dev ? "development" : "production")
+        "process.env.NODE_ENV": JSON.stringify(prod ? "production" : "development")
       }),
-      ...electron ? [
+      ...electronMain && !prod ? [
         new webpack.BannerPlugin({
           banner: 'require("source-map-support").install();',
           entryOnly: false,
           raw: true
         })
       ] : [],
-      ...prod ? [
+      ...electronRenderer && prod ? [
         extractCSS
       ] : [],
-      ...dev ? [
+      ...electronRenderer && !prod ? [
         new webpack.HotModuleReplacementPlugin(),
+      ] : [],
+      ...!prod ? [
         new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
       ] : []
     ],
-    target: electron ? "electron-main" : "electron-renderer"
+    target: electronMain ? "electron-main" : "electron-renderer"
   };
 
 };
