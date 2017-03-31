@@ -23,7 +23,4 @@ npm run build # build for production
 npm run start-prod # start app in production mode
 npm run package # package for current OS
 npm run package-all # package for all OS
-npm run archive # archive for current OS
-npm run archive-all # archive for all OS
-npm run release # build -> package-all -> archive-all
 ```
