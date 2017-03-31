@@ -6,7 +6,7 @@ const cssnext = require("postcss-cssnext");
 module.exports = {
   plugins: [
     cssimport({
-      path: ["node_modules", "./app"]
+      path: ["node_modules", "./app/renderer/styles"]
     }),
     cssnext({
       browsers: ["Chrome >= 56"]

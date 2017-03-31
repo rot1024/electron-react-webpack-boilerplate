@@ -26,12 +26,12 @@ function createWindow() {
   });
 
   if (process.env.NODE_ENV === "development") {
-    win.loadURL(`file://${__dirname}/index.html`);
+    win.loadURL(`file://${__dirname}/../renderer/index.html`);
     win.webContents.openDevTools();
   }
 
   if (process.env.NODE_ENV === "production") {
-    win.loadURL(`file://${__dirname}/../app/index.html`);
+    win.loadURL(`file://${__dirname}/../app/renderer/index.html`);
   }
 
   win.webContents.on("did-finish-load", () => {

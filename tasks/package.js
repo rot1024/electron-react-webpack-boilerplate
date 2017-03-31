@@ -16,7 +16,8 @@ const options = {
   icon: pkg.electronIcon,
   ignore: [
     /^\/(?!app|build|package.json$)/,
-    /^\/app\/(?!assets|index.html)/
+    /^\/app\/(?!resources|renderer)/,
+    /^\/app\/renderer\/(?!index.html)/
   ],
   name: pkg.productName || pkg.name,
   out: "dist"

@@ -13,7 +13,7 @@
     "eslint": "eslint app tasks",
     "stylelint": "stylelint app/**/*.css",
     "start-prod": "electron .",
-    "start-dev": "cross-env NODE_ENV=development electron -r babel-register app",
+    "start-dev": "cross-env NODE_ENV=development electron -r babel-register app/main",
     "dev": "run-p dev-server start-dev",
     "dev-server": "webpack-dev-server",
     "build": "run-p build-main build-renderer",

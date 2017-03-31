@@ -34,7 +34,7 @@ module.exports = ({ platform, prod } = {}) => {
     },
     devtool: prod ? undefined : "inline-source-map",
     entry: electronMain ? [
-      "./app"
+      "./app/main"
     ] : [
       ...!prod ? [
         "react-hot-loader/patch",
