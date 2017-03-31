@@ -1,15 +1,40 @@
 {
-  "presets": ["eslatest-node6", "stage-3", "react"],
+  "presets": [
+    ["env", {
+      "targets": { "browsers": ["Chrome >= 56"] },
+      "modules": false
+    }],
+    "react"
+  ],
   "plugins": [
     "transform-class-properties",
+    "transform-export-extensions",
     "transform-decorators-legacy",
-    "transform-export-extensions"
+    "transform-object-rest-spread",
+    ["transform-runtime", { "polyfill": false }]
   ],
   "env": {
-    "development": {
-      "plugins": ["react-hot-loader/babel"]
+    "electron": {
+      "presets": [
+        ["env", {
+          "targets": { "node": 7.4 }
+        }]
+      ]
+    },
+    "electron-build": {
+      "presets": [
+        ["env", {
+          "targets": { "node": 7.4 },
+          "modules": false
+        }]
+      ]
     },
     "test": {
+      "presets": [
+        ["env", {
+          "targets": { "node": "current" }
+        }]
+      ],
       "sourceMaps": "inline"
     }
   }

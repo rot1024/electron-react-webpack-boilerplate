@@ -50,7 +50,10 @@ module.exports = ({ platform, prod } = {}) => {
       rules: [
         {
           test: /\.js($|\?)/,
-          use: "babel-loader",
+          use: [
+            ...electronRenderer && !prod ? ["react-hot-loader/webpack"] : [],
+            "babel-loader"
+          ],
           exclude: /node_modules/
         },
         {

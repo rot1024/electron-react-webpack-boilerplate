@@ -5,10 +5,10 @@ import { AppContainer } from "react-hot-loader";
 import "./style.css";
 import App from "./app";
 
-function render(AppComponent) {
+function render() {
   ReactDOM.render(
     <AppContainer>
-      <AppComponent />
+      <App />
     </AppContainer>,
     document.getElementById("root")
   );
@@ -17,7 +17,5 @@ function render(AppComponent) {
 render(App);
 
 if (module.hot) {
-  module.hot.accept("./app", () => {
-    render(require("./app").default);
-  });
+  module.hot.accept("./app", () => { render(); });
 }
