@@ -4,6 +4,7 @@ const path = require("path");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const BabiliPlugin = require("babili-webpack-plugin");
 
 const PORT = 3000;
@@ -89,7 +90,10 @@ module.exports = ({ platform, prod } = {}) => {
         ],
         new HtmlPlugin({
           template: "app/renderer/index.html"
-        })
+        }),
+        new CopyPlugin([
+          { from: "resources", to: "resources", ignore: [".gitkeep"] }
+        ])
       ] : [
         ...prod ? [] : [
           new webpack.BannerPlugin({
