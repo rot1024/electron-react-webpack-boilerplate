@@ -8,15 +8,17 @@ const pkg = require("../package.json");
 const shouldBuildAll = argv.all || false;
 
 const options = {
+  appCategoryType: pkg.electron.categoryType,
+  appCopyright: pkg.electron.copyright,
   appVersion: pkg.version,
   asar: true,
   dir: ".",
   electronVersion: pkg.devDependencies.electron.replace(/^\^/, ""),
-  icon: pkg.electronIcon,
+  icon: pkg.electron.icon,
   ignore: [
     /^\/(?!build|package.json$)/
   ],
-  name: pkg.productName || pkg.name,
+  name: pkg.electron.name || pkg.name,
   out: "dist",
   overwrite: true
 };

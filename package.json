@@ -1,9 +1,11 @@
 {
   "name": "electron-react-webpack-boilerplate",
-  "productName": "ElectronReactWebpackBoilerplate",
   "version": "1.0.0",
   "description": "Electron + webpack + Babel + React",
   "main": "build",
+  "electron": {
+    "name": "ElectronReactWebpackBoilerplate"
+  },
   "scripts": {
     "start": "run-s dev",
     "postinstall": "electron-rebuild",
