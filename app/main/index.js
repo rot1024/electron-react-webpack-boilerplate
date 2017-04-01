@@ -1,5 +1,7 @@
 import { app, BrowserWindow } from "electron";
 
+const PORT = 3000;
+
 let win;
 
 function createWindow() {
@@ -11,9 +13,9 @@ function createWindow() {
 
   if (process.env.NODE_ENV === "development") {
     require("electron-debug")();
-    win.loadURL(`file://${__dirname}/../renderer/index.html`);
+    win.loadURL(`http://localhost:${PORT}/build/index.html`);
   } else {
-    win.loadURL(`file://${__dirname}/../app/renderer/index.html`);
+    win.loadURL(`file://${__dirname}/index.html`);
   }
 
   win.webContents.on("did-finish-load", () => {
@@ -24,10 +26,6 @@ function createWindow() {
   win.on("closed", () => {
     win = null;
   });
-}
-
-if (process.env.NODE_ENV === "development") {
-  require("electron-debug")();
 }
 
 app.on("ready", async () => {
