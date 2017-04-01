@@ -65,7 +65,6 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^4.0.0",
     "css-loader": "^0.28.0",
-    "del": "^2.2.1",
     "devtron": "^1.2.1",
     "electron": "^1.6.2",
     "electron-debug": "^1.1.0",
