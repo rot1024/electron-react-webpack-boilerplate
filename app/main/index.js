@@ -12,6 +12,7 @@ function createWindow() {
   });
 
   if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line node/no-unpublished-require
     require("electron-debug")();
     win.loadURL(`http://localhost:${PORT}/build/index.html`);
   } else {
@@ -30,6 +31,7 @@ function createWindow() {
 
 app.on("ready", async () => {
   if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line node/no-unpublished-require
     const installer = require("electron-devtools-installer");
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
     const extensions = [
