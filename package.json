@@ -50,6 +50,9 @@
       "app/**/*.js"
     ]
   },
+  "browserslist": [
+    "Electron 1.6"
+  ],
   "devDependencies": {
     "ava": "^0.19.1",
     "babel-core": "^6.24.1",

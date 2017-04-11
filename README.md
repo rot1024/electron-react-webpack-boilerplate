@@ -24,3 +24,9 @@ npm run start-prod # start app in production mode
 npm run package # package for current OS
 npm run package-all # package for all OS
 ```
+
+## How to Upgrade Electron
+
+1. Upgrade electron: `yarn upgrade-interactive`
+2. Rewrite `"Electron X.X"` and `"node": X.X` on browserslist in `package.json` and `.babelrc` into latest electron and node versions
+3. Done!
