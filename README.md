@@ -2,27 +2,27 @@
 
 Electron + webpack + Babel + React
 
-REQUIRED: Node.js >= v6
+REQUIRED: Node.js >= v6 + Yarn
 
 ## Getting Started
 
 ```sh
 git clone https://github.com/rot1024/electron-webpack-react-boilerplate.git
 cd electron-webpack-react-boilerplate
-npm install # or yarn
+yarn
 ```
 
 ## Usage
 
 ```sh
-npm start # start dev server and open app
-npm run lint # lint
-npm test # test
-npm test-watch # watch tests
-npm run build # build for production
-npm run start-prod # start app in production mode
-npm run package # package for current OS
-npm run package-all # package for all OS
+yarn start # start dev server and open app
+yarn run lint # lint
+yarn test # test
+yarn test-watch # watch tests
+yarn run build # build for production
+yarn run start-prod # start app in production mode
+yarn run package # package for current OS
+yarn run package-all # package for all OS
 ```
 
 ## How to Upgrade Electron
