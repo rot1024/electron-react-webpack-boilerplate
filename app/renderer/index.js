@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
 
-import "./style.css";
 import App from "./app";
 
 function render() {
