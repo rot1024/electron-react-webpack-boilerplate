@@ -1,14 +1,25 @@
 # electron-react-webpack-boilerplate
 
-Electron + webpack + Babel + React
+Electron + webpack + Babel + React + CSS Modules + cssnext
 
 REQUIRED: Node.js >= v6 + Yarn
 
 ## Getting Started
 
 ```sh
-git clone https://github.com/rot1024/electron-webpack-react-boilerplate.git
-cd electron-webpack-react-boilerplate
+git clone https://github.com/your-name/your-project.git
+cd your-project
+git remote add upstream https://github.com/rot1024/electron-webpack-react-boilerplate.git
+git fetch upstream
+git merge upstream/master
+yarn
+```
+
+## Follow This Boilerplate
+
+```sh
+git fetch upstream
+git merge upstream/master
 yarn
 ```
 
