@@ -81,7 +81,7 @@ module.exports = ({ platform, prod } = {}) => {
       __filename: false
     } : {},
     output: {
-      filename: electronMain ? "index.js" : "bundle.js",
+      filename: electronMain ? "main.js" : "renderer.js",
       libraryTarget: "commonjs2",
       path: path.resolve(__dirname, "build"),
       publicPath: electronRenderer && !prod ? `http://localhost:${PORT}/build/` : undefined
@@ -91,6 +91,11 @@ module.exports = ({ platform, prod } = {}) => {
         "process.env.NODE_ENV": JSON.stringify(prod ? "production" : "development")
       }),
       new webpack.optimize.ModuleConcatenationPlugin(),
+      new webpack.optimize.CommonsChunkPlugin({
+        names: ["vendor", "manifest"],
+        filename: `vendor.${electronMain ? "main" : "renderer"}.js`,
+        minChunks: module => module.context && module.context.indexOf("node_modules") !== -1
+      }),
       ...electronRenderer ? [
         ...prod ? [
           extractCSS
