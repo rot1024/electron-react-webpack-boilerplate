@@ -30,6 +30,7 @@ yarn start # start dev server and open app
 yarn run lint # lint
 yarn test # test
 yarn run test-watch # watch tests
+yarn run test:e2e # e2e test: you have to exec 'yarn run build' before e2e test
 yarn run clean # delete build directory
 yarn run build # build for production
 yarn run start-prod # start app in production mode

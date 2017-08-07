@@ -84,5 +84,24 @@ module.exports = {
     }],
     "new-cap": 0,
     "object-curly-spacing": 0
-  }
+  },
+  overrides: [
+    {
+      files: [
+        "**/*.test.js",
+        "test/**/*.js"
+      ],
+      env: {
+        "jest/globals": true
+      },
+      plugins: ["jest"],
+      rules: {
+        "import/unambiguous": 0,
+        "jest/no-disabled-tests": 1,
+        "jest/no-focused-tests": 2,
+        "jest/no-identical-title": 2,
+        "jest/valid-expect": 2
+      }
+    }
+  ]
 };
