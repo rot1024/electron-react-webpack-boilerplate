@@ -29,13 +29,15 @@ yarn
 yarn start # start dev server and open app
 yarn run lint # lint
 yarn test # test
-yarn run test-watch # watch tests
-yarn run test:e2e # e2e test: you have to exec 'yarn run build' before e2e test
+yarn run test:coverage # test with coverage
+yarn run test:watch # watch tests
+yarn run test:e2e # e2e test ***
 yarn run clean # delete build directory
 yarn run build # build for production
-yarn run start-prod # start app in production mode
+yarn run start:prod # start app in production mode ***
 yarn run package # package for current OS
-yarn run package-all # package for all OS
+yarn run package:all # package for all OS
+# ***: you have to exec 'yarn run build' before
 ```
 
 ## How to Upgrade Electron
@@ -43,3 +45,5 @@ yarn run package-all # package for all OS
 1. Upgrade electron: `yarn upgrade-interactive`
 2. Rewrite `"Electron x.x"` and `"node": "x.x"` on browserslist in `package.json` and `.babelrc` into latest electron and node versions
 3. Done!
+
+This operation is going to be unnecessary if babel-preset-env supports to read browserslist config.
