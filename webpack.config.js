@@ -5,6 +5,7 @@ const path = require("path");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
+const HtmlWebpackIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const BabiliPlugin = require("babili-webpack-plugin");
 
@@ -48,6 +49,8 @@ module.exports = ({ platform, prod } = {}) => {
     ],
     externals: electronMain && !prod ? [
       "source-map-support"
+    ] : electronRenderer ? [
+      "cesium"
     ] : [],
     module: {
       rules: [
@@ -94,12 +97,27 @@ module.exports = ({ platform, prod } = {}) => {
         ] : [
           new webpack.HotModuleReplacementPlugin()
         ],
+        new CopyPlugin([
+          {
+            from: "resources",
+            to: "resources",
+            ignore: [".gitkeep"]
+          },
+          {
+            from: `node_modules/cesium/Build/Cesium${prod ? "" : "Unminified"}`,
+            to: "cesium"
+          }
+        ]),
         new HtmlPlugin({
           template: "app/renderer/index.html"
         }),
-        new CopyPlugin([
-          { from: "resources", to: "resources", ignore: [".gitkeep"] }
-        ])
+        new HtmlWebpackIncludeAssetsPlugin({
+          append: false,
+          assets: [
+            "cesium/Widgets/widgets.css",
+            "cesium/Cesium.js"
+          ]
+        })
       ] : [
         ...prod ? [] : [
           new webpack.BannerPlugin({

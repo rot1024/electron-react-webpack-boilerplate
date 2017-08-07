@@ -6,6 +6,6 @@ import App from "./app";
 test("App", () => {
 
   const wrapper = shallow(<App />);
-  expect(wrapper.children().at(0).text()).toBe("Hello!");
+  expect(wrapper.name()).toBe("div");
 
 });
