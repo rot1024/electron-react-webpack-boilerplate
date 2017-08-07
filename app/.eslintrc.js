@@ -4,12 +4,13 @@ module.exports = {
     sourceType: "module",
     allowImportExportEverywhere: false
   },
-  plugins: ["babel", "react"],
+  plugins: ["babel", "react", "compat"],
   rules: {
     "babel/new-cap": 2,
     "babel/no-invalid-this": 2,
     "babel/object-curly-spacing": [1, "always"],
     "babel/semi": 0,
+    "compat/compat": 2,
     "node/no-unsupported-features": 0,
     "node/shebang": 0,
     "react/default-props-match-prop-types": 1,
