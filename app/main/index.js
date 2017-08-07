@@ -33,6 +33,7 @@ app.on("ready", async () => {
   if (process.env.NODE_ENV === "development") {
     // eslint-disable-next-line node/no-unpublished-require
     const installer = require("electron-devtools-installer");
+
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
     const extensions = [
       "REACT_DEVELOPER_TOOLS",

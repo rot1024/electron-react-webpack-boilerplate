@@ -1,6 +1,7 @@
 "use strict";
 
 const path = require("path");
+
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
@@ -41,7 +42,7 @@ module.exports = ({ platform, prod } = {}) => {
       ...!prod ? [
         "react-hot-loader/patch",
         `webpack-dev-server/client?http://localhost:${PORT}`,
-        "webpack/hot/only-dev-server",
+        "webpack/hot/only-dev-server"
       ] : [],
       "./app/renderer"
     ],
@@ -68,7 +69,7 @@ module.exports = ({ platform, prod } = {}) => {
         },
         {
           test: /\.node$/,
-          use: 'node-loader'
+          use: "node-loader"
         }
       ]
     },
@@ -86,11 +87,12 @@ module.exports = ({ platform, prod } = {}) => {
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(prod ? "production" : "development")
       }),
+      new webpack.optimize.ModuleConcatenationPlugin(),
       ...electronRenderer ? [
         ...prod ? [
           extractCSS
         ] : [
-          new webpack.HotModuleReplacementPlugin(),
+          new webpack.HotModuleReplacementPlugin()
         ],
         new HtmlPlugin({
           template: "app/renderer/index.html"
@@ -105,7 +107,7 @@ module.exports = ({ platform, prod } = {}) => {
             entryOnly: false,
             raw: true
           })
-        ],
+        ]
       ],
       ...prod ? [
         new BabiliPlugin()

@@ -1,8 +1,10 @@
 "use strict";
 
 const os = require("os");
+
 const packager = require("electron-packager");
 const argv = require("minimist")(process.argv.slice(2));
+
 const pkg = require("../package.json");
 
 const shouldBuildAll = argv.all || false;

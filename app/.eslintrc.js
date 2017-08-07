@@ -1,25 +1,18 @@
 module.exports = {
-  env: {
-    commonjs: true
-  },
   parser: "babel-eslint",
   parserOptions: {
     sourceType: "module",
     allowImportExportEverywhere: false
   },
-  plugins: ["babel", "react", "compat"],
+  plugins: ["babel", "react"],
   rules: {
-    "babel/no-invalid-this": 2,
     "babel/new-cap": 2,
+    "babel/no-invalid-this": 2,
     "babel/object-curly-spacing": [1, "always"],
-    "compat/compat": 2,
-    "node/no-unpublished-import": [2, {
-      "allowModules": ["electron"]
-    }],
-    "node/no-unpublished-require": [2, {
-      "allowModules": ["electron"]
-    }],
+    "babel/semi": 0,
     "node/no-unsupported-features": 0,
+    "node/shebang": 0,
+    "react/default-props-match-prop-types": 1,
     "react/display-name": 1,
     "react/forbid-component-props": 0,
     "react/forbid-prop-types": 0,
@@ -34,6 +27,7 @@ module.exports = {
     "react/no-find-dom-node": 2,
     "react/no-is-mounted": 2,
     "react/no-multi-comp": 1,
+    "react/no-redundant-should-component-update": 1,
     "react/no-render-return-value": 2,
     "react/no-set-state": 0,
     "react/no-string-refs": 2,
@@ -44,15 +38,17 @@ module.exports = {
     "react/prefer-stateless-function": [1, { ignorePureComponents: true }],
     "react/prop-types": 2,
     "react/react-in-jsx-scope": 2,
-    "react/require-default-props": 1,
+    "react/require-default-props": 0,
     "react/require-render-return": 2,
     "react/require-optimization": 1,
     "react/self-closing-comp": 1,
     "react/sort-comp": 1,
     "react/sort-prop-types": 1,
     "react/style-prop-object": 2,
+    "react/void-dom-elements-no-children": 2,
     "react/jsx-boolean-value": [1, "never"],
     "react/jsx-closing-bracket-location": [1, "after-props"],
+    "react/jsx-closing-tag-location": 1,
     "react/jsx-curly-spacing": [1, "never"],
     "react/jsx-equals-spacing": [1, "never"],
     "react/jsx-handler-names": 1,
@@ -66,7 +62,6 @@ module.exports = {
     "react/jsx-no-undef": 2,
     "react/jsx-pascal-case": 1,
     "react/jsx-sort-props": 0,
-    "react/jsx-space-before-closing": [1, "always"],
     "react/jsx-tag-spacing": [1, {
       closingSlash: "never",
       beforeSelfClosing: "always",

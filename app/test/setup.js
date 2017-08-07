@@ -4,6 +4,7 @@ import { jsdom } from "jsdom";
 global.document = jsdom("<!doctype html><html><body></body></html>");
 global.window = global.document.defaultView;
 global.navigator = global.window.navigator;
+// eslint-disable-next-line no-multi-assign
 global.window.localStorage = global.window.sessionStorage = {
   map: new Map(),
   getItem(key) {

@@ -5,10 +5,6 @@ import "./style.css";
 // eslint-disable-next-line react/prefer-stateless-function
 export default class App extends React.PureComponent {
 
-  static propTypes = {
-
-  };
-
   render() {
     return (
       <div>
