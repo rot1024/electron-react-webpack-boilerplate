@@ -50,6 +50,7 @@ module.exports = {
     "react/jsx-boolean-value": [1, "never"],
     "react/jsx-closing-bracket-location": [1, "after-props"],
     "react/jsx-closing-tag-location": 1,
+    "react/jsx-curly-brace-presence": [1, { "props": "never", "children": "never" }],
     "react/jsx-curly-spacing": [1, "never"],
     "react/jsx-equals-spacing": [1, "never"],
     "react/jsx-handler-names": 1,

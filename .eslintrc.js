@@ -48,6 +48,7 @@ module.exports = {
     "func-names": 0,
     "func-name-matching": 0,
     "func-style": 0,
+    "function-paren-newline": [1, "consistent"],
     "getter-return": 2,
     "generator-star-spacing": [1, "before"],
     "global-require": 0,

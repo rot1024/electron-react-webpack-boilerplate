@@ -40,6 +40,16 @@ yarn run package:all # package for all OS
 # ***: you have to exec 'yarn run build' before
 ```
 
+## How to put static files
+
+You can put any static files on `resources` directory, and load their resources as bellow:
+
+```html
+<img src="resources/image.png" />
+```
+
+If you want to load any files in renderer, use webpack loader.
+
 ## How to Upgrade Electron
 
 1. Upgrade electron: `yarn upgrade-interactive`
