@@ -103,7 +103,7 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
-    "cesium": "^1.36.0",
+    "cesium": "^1.37.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
