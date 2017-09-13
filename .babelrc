@@ -1,7 +1,7 @@
 {
   "presets": [
     ["env", {
-      "targets": { "electron": "1.6" },
+      "targets": { "electron": "1.7" },
       "modules": false
     }],
     "react"
@@ -20,7 +20,7 @@
     "electron": {
       "presets": [
         ["env", {
-          "targets": { "node": "7.4" }
+          "targets": { "node": "7.9" }
         }]
       ]
     },
